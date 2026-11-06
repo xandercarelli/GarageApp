@@ -85,7 +85,7 @@ const fmt=i=>{const[d,t]=S(i).split('T'),[y,m,g]=d.split('-');return g+'/'+m+'/'
 const veh=id=>D.veicoli.find(v=>S(v.id)==S(id)),vn=id=>{const v=veh(id);return v?v.marca+' '+v.modello:'(eliminato)'};
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2800)}
 async function run(f){try{await f()}catch(e){toast('Errore: '+e)}}
-async function load(){if(API.startsWith('INCOLLA'))throw'imposta l\'URL dello script';const r=await(await fetch(API+'?c='+encodeURIComponent(code))).json();if(r.error)throw r.error;D=r}
+async function load(){if(API.startsWith('INCOLLA'))throw'imposta l\'URL dello script';const r=await(await fetch(API+'?k='+encodeURIComponent(code))).json();if(r.error)throw r.error;D=r}
 async function send(sheet,op,row){const r=await(await fetch(API,{method:'POST',body:JSON.stringify({c:code,sheet,op,row})})).json();if(r.error)throw r.error}
 async function refresh(){await load();draw()}
 async function login(){code=$('#code').value.trim();try{await load();localStorage.setItem('code',code);start()}catch(e){$('#lerr').textContent=e=='codice'?'Codice non corretto':'Connessione non riuscita: '+e}}
