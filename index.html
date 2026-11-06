@@ -75,7 +75,7 @@ nav button{flex:1;background:none;color:var(--mut);border-radius:0;padding:12px 
 <nav hidden><button data-t="pieno" onclick="show('pieno')">Rifornimento</button><button data-t="manut" onclick="show('manut')">Manutenzione</button><button data-t="report" onclick="show('report')">Dati</button><button data-t="mezzi" onclick="show('mezzi')">Mezzi</button></nav>
 <div id="toast" role="status"></div>
 <script>
-const API='https://script.google.com/macros/s/AKfycbxK1WDAhpUOjKuA6oZWcakPDqbGHtKUeGChiqKjTUeTzDtobSbcKrVseX-wzaiYqTWZ/exec';
+const API='INCOLLA_QUI_URL_APPS_SCRIPT';
 let D={veicoli:[],rifornimenti:[],manutenzioni:[]},code=localStorage.getItem('code')||'',cur=[];
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],S=x=>String(x??'');
 const esc=s=>S(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -85,7 +85,7 @@ const fmt=i=>{const[d,t]=S(i).split('T'),[y,m,g]=d.split('-');return g+'/'+m+'/'
 const veh=id=>D.veicoli.find(v=>S(v.id)==S(id)),vn=id=>{const v=veh(id);return v?v.marca+' '+v.modello:'(eliminato)'};
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2800)}
 async function run(f){try{await f()}catch(e){toast('Errore: '+e)}}
-async function load(){if(API.startsWith('INCOLLA'))throw'imposta l\'URL dello script';const r=await(await fetch(API+'?k='+encodeURIComponent(code))).json();if(r.error)throw r.error;D=r}
+async function load(){if(API.startsWith('INCOLLA'))throw'imposta l\'URL dello script';const r=await(await fetch(API+'?c='+encodeURIComponent(code))).json();if(r.error)throw r.error;D=r}
 async function send(sheet,op,row){const r=await(await fetch(API,{method:'POST',body:JSON.stringify({c:code,sheet,op,row})})).json();if(r.error)throw r.error}
 async function refresh(){await load();draw()}
 async function login(){code=$('#code').value.trim();try{await load();localStorage.setItem('code',code);start()}catch(e){$('#lerr').textContent=e=='codice'?'Codice non corretto':'Connessione non riuscita: '+e}}
