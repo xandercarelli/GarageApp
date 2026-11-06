@@ -75,7 +75,7 @@ nav button{flex:1;background:none;color:var(--mut);border-radius:0;padding:12px 
 <nav hidden><button data-t="pieno" onclick="show('pieno')">Rifornimento</button><button data-t="manut" onclick="show('manut')">Manutenzione</button><button data-t="report" onclick="show('report')">Dati</button><button data-t="mezzi" onclick="show('mezzi')">Mezzi</button></nav>
 <div id="toast" role="status"></div>
 <script>
-const API='INCOLLA_QUI_URL_APPS_SCRIPT';
+const API='https://script.google.com/macros/s/AKfycby_wVMtBO4Tl-vPpWbDNg77dK9VCMyrEb4fWu81y22Es0Y1DAHbh3Az_gJ6v-IgNrQ/exec';
 let D={veicoli:[],rifornimenti:[],manutenzioni:[]},code=localStorage.getItem('code')||'',cur=[];
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],S=x=>String(x??'');
 const esc=s=>S(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
